@@ -1,5 +1,5 @@
 ---
-import Navigation from '../components/Navigation.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 
 const pageTitle = "About Me";
@@ -16,6 +16,10 @@ const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -25,21 +29,9 @@ const goal = 3;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
-    <style>
-      h1 {
-        color: purple;
-        font-size: 4rem;
-      }
-      .skill {
-        color: green;
-        font-weight: bold;
-        font-size: 1.5rem;
-      }
-    </style>
 	</head>
 	<body>
-    <Navigation />
-		<h1>{pageTitle}</h1>
+    <BaseLayout pageTitle={pageTitle}>
     <h2>... and my new Astro site!</h2>
     <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
     <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
@@ -61,5 +53,19 @@ const goal = 3;
     { finished && <p>I finished this tutorial!</p>}
 
     {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+
+    </BaseLayout>
+    <style is:global define:vars={{ skillColor, fontWeight, textCase }}>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+      .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        font-size: 1.5rem;
+        text-transform: var(--textCase);
+      }
+    </style>
 	</body>
 </html>
